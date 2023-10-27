@@ -5,45 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
     <style>
-        body {
-            font-family: Arial;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
         #grid {
+            width: 200px;
+            height: 200px;
             display: grid;
             grid-template-columns: repeat(10, 20px);
             gap: 1px;
-            margin-bottom: 10px;
+            border: 1px solid black;
+            margin: 20px auto;
         }
         #grid div {
             width: 20px;
             height: 20px;
             background-color: #e6e6e6;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
     </style>
 </head>
 <body>
-    <div>
-        <form name="snakeGame">
-            <div id="grid"></div>
-            <div>
-                <button type="button" onclick="move('UP')">Up</button>
-                <button type="button" onclick="move('LEFT')">Left</button>
-                <button type="button" onclick="move('RIGHT')">Right</button>
-                <button type="button" onclick="move('DOWN')">Down</button>
-            </div>
-            <div id="score">Score: 0</div>
-        </form>
-    </div>
+    <center>
+        <div id="grid"></div>
+        <div>
+            <button type="button" onclick="move('UP')">Up</button>
+            <button type="button" onclick="move('LEFT')">Left</button>
+            <button type="button" onclick="move('RIGHT')">Right</button>
+            <button type="button" onclick="move('DOWN')">Down</button>
+        </div>
+        <div id="score">Score: 0</div>
+    </center>
     <script>
         let gridSize = 10;
         let snake = [{ x: 5, y: 5 }];
@@ -54,7 +42,6 @@
         let touchEndX = 0;
         let touchEndY = 0;
         let d;
-        let gameSpeed = 500; // Adjust this value to slow down or speed up the snake. Higher values are slower.
 
         function draw() {
             let grid = document.getElementById('grid');
@@ -109,7 +96,6 @@
             }
 
             draw();
-            setTimeout(() => move(d), gameSpeed);
         }
 
         document.addEventListener('touchstart', function(e) {
@@ -129,22 +115,27 @@
 
             if (Math.abs(diffX) > Math.abs(diffY)) {
                 // Horizontal swipe
-                if (diffX > 0 && d !== "LEFT") {
+                if (diffX > 0) {
                     d = "RIGHT";
-                } else if (diffX < 0 && d !== "RIGHT") {
+                } else {
                     d = "LEFT";
                 }
             } else {
                 // Vertical swipe
-                if (diffY > 0 && d !== "UP") {
+                if (diffY > 0) {
                     d = "DOWN";
-                } else if (diffY < 0 && d !== "DOWN") {
+                } else {
                     d = "UP";
                 }
             }
 
             move(d);
         }
+
+        draw();
+    </script>
+</body>
+</html>
 
         draw();
     </script>
