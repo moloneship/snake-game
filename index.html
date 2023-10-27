@@ -5,17 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
     <style>
+        body {
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
         #grid {
             display: grid;
             grid-template-columns: repeat(10, 20px);
             border: 1px solid black;
             gap: 1px;
+            margin-bottom: 10px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 </head>
 <body>
-    <div style="font-family: Arial;">
-        <form name="snakeGame" style="display: flex; flex-direction: column; align-items: center;">
+    <div>
+        <form name="snakeGame">
             <div id="grid"></div>
             <div>
                 <button type="button" onclick="move('UP')">Up</button>
@@ -36,6 +49,7 @@
         let touchEndX = 0;
         let touchEndY = 0;
         let d;
+        let gameSpeed = 500; // Adjust this value to slow down or speed up the snake. Higher values are slower.
 
         function draw() {
             let grid = document.getElementById('grid');
@@ -90,6 +104,7 @@
             }
 
             draw();
+            setTimeout(() => move(d), gameSpeed);
         }
 
         document.addEventListener('touchstart', function(e) {
@@ -128,6 +143,9 @@
 
         draw();
     </script>
+</body>
+</html>
+
 </body>
 </html>
 
